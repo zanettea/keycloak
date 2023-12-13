@@ -187,6 +187,17 @@ public interface PolicyStore {
     List<Policy> findByType(ResourceServer resourceServer, String type);
 
     /**
+     * Returns a list of {@link Policy} with the given <code>type</code> and config values matching the given substring.
+     *
+     * @param resourceServer the resource server id. Cannot be {@code null}.
+     * @param type the type of the policy
+     * @param value the config key to match
+     * @param value the substring to match in config value
+     * @return a list of policies with the given type
+     */
+    List<Policy> findByTypeAndConfigKeyValue(ResourceServer resourceServer, String type, String key, String value);
+
+    /**
      * Returns a list of {@link Policy} that depends on another policy with the given <code>id</code>.
      *
      * @param resourceServer the resource server

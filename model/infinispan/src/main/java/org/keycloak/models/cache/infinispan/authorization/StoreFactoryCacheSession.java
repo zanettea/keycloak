@@ -1052,6 +1052,11 @@ public class StoreFactoryCacheSession implements CachedStoreFactoryProvider {
         }
 
         @Override
+        public List<Policy> findByTypeAndConfigKeyValue(ResourceServer resourceServer, String type, String key, String value) {
+            return getPolicyStoreDelegate().findByTypeAndConfigKeyValue(resourceServer, type, key, value);
+        }
+
+        @Override
         public List<Policy> findDependentPolicies(ResourceServer resourceServer, String id) {
             return getPolicyStoreDelegate().findDependentPolicies(resourceServer, id);
         }

@@ -274,6 +274,20 @@ public class MapPolicyStore implements PolicyStore {
     }
 
     @Override
+    public List<Policy> findByTypeAndConfigKeyValue(ResourceServer resourceServer, String type, String key, String value) {
+        LOG.tracef("findByTypeAndValue(%s, %s, %s, %s)%s", resourceServer, type, key, value, getShortStackTrace());
+        RealmModel realm = resourceServer.getRealm();
+
+        return storeWithRealm(realm).read(withCriteria(forRealmAndResourceServer(realm, resourceServer)
+                .compare(SearchableFields.TYPE, Operator.EQ, type)))
+                .map(entityToAdapterFunc(realm, resourceServer))
+                .filter( (p) -> p.getConfig().get(key).contains(value) )
+                .collect(Collectors.toList());
+
+    }
+
+
+    @Override
     public List<Policy> findDependentPolicies(ResourceServer resourceServer, String id) {
         RealmModel realm = resourceServer.getRealm();
         return storeWithRealm(realm).read(withCriteria(forRealmAndResourceServer(realm, resourceServer)

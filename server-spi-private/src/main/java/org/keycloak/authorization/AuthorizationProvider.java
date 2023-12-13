@@ -435,6 +435,11 @@ public final class AuthorizationProvider implements Provider {
             }
 
             @Override
+            public List<Policy> findByTypeAndConfigKeyValue(ResourceServer resourceServer, String type, String key, String value) {
+                return policyStore.findByTypeAndConfigKeyValue(resourceServer, type, key, value);
+            }   
+            
+            @Override
             public List<Policy> findDependentPolicies(ResourceServer resourceServer, String id) {
                 return policyStore.findDependentPolicies(resourceServer, id);
             }
