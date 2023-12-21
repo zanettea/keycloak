@@ -358,11 +358,11 @@ public class PermissionsTest extends AbstractKeycloakTest {
         GroupRepresentation newGroup = new GroupRepresentation();
         newGroup.setName("sample");
         adminClient.realm(REALM_NAME).groups().add(newGroup);
-        GroupRepresentation group = adminClient.realms().realm(REALM_NAME).getGroupByPath("sample");
+        GroupRepresentation group = adminClient.realms().realm(REALM_NAME).getGroupByPath("sample", null);
 
         invoke(new Invocation() {
             public void invoke(RealmResource realm) {
-                realm.getGroupByPath("sample");
+                realm.getGroupByPath("sample", null);
             }
         }, Resource.USER, false);
 
@@ -1342,7 +1342,7 @@ public class PermissionsTest extends AbstractKeycloakTest {
             }
         }, Resource.USER, true);
 
-        GroupRepresentation group = adminClient.realms().realm(REALM_NAME).getGroupByPath("mygroup");
+        GroupRepresentation group = adminClient.realms().realm(REALM_NAME).getGroupByPath("mygroup", null);
         ClientRepresentation realmAccessClient = adminClient.realms().realm(REALM_NAME).clients().findByClientId(Constants.REALM_MANAGEMENT_CLIENT_ID).get(0);
 
         // this should throw forbidden as "create-client" role isn't enough
@@ -1435,7 +1435,7 @@ public class PermissionsTest extends AbstractKeycloakTest {
                 realm.groups().group(group.getId()).remove();
                 group.setId(null);
                 realm.groups().add(group);
-                GroupRepresentation temp = realm.getGroupByPath("mygroup");
+                GroupRepresentation temp = realm.getGroupByPath("mygroup", null);
                 group.setId(temp.getId());
             }
         }, Resource.USER, true);

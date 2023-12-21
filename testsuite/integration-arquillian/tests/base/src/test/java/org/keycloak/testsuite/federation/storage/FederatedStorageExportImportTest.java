@@ -119,7 +119,7 @@ public class FederatedStorageExportImportTest extends AbstractAuthTest {
         });
 
         final String realmId = testRealmResource().toRepresentation().getId();
-        final String groupId = testRealmResource().getGroupByPath("/test-group").getId();
+        final String groupId = testRealmResource().getGroupByPath("/test-group", null).getId();
         final String exportFileAbsolutePath = this.exportFileAbsolutePath;
 
         testingClient.server().run(session -> {
@@ -189,7 +189,7 @@ public class FederatedStorageExportImportTest extends AbstractAuthTest {
         });
 
         final String realmId = testRealmResource().toRepresentation().getId();
-        final String groupId = testRealmResource().getGroupByPath("/test-group").getId();
+        final String groupId = testRealmResource().getGroupByPath("/test-group", null).getId();
         final String exportDirAbsolutePath = this.exportDirAbsolutePath;
 
         testingClient.server().run(session -> {

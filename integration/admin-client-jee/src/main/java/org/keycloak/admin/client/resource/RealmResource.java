@@ -165,7 +165,7 @@ public interface RealmResource {
     @GET
     @Path("group-by-path/{path: .*}")
     @Produces(MediaType.APPLICATION_JSON)
-    GroupRepresentation getGroupByPath(@PathParam("path") String path);
+    GroupRepresentation getGroupByPath(@PathParam("path") String path, @QueryParam("lazy") Boolean lazy);
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)

@@ -216,7 +216,11 @@ public class ModelToRepresentation {
     }
 
     public static GroupRepresentation toGroupHierarchy(GroupModel group, boolean full) {
-        return toGroupHierarchy(group, full, (String) null);
+        return toGroupHierarchyLazy(group, full, null);
+    }
+
+    public static GroupRepresentation toGroupHierarchyLazy(GroupModel group, boolean full, Boolean lazy) {
+        return toGroupHierarchyLazy(group, full, (String) null, false, lazy);
     }
 
     @Deprecated
@@ -225,10 +229,14 @@ public class ModelToRepresentation {
     }
 
     public static GroupRepresentation toGroupHierarchy(GroupModel group, boolean full, String search, Boolean exact) {
+        return toGroupHierarchyLazy(group, full, search, exact, null);
+    }
+
+    public static GroupRepresentation toGroupHierarchyLazy(GroupModel group, boolean full, String search, Boolean exact, Boolean lazy) {
         GroupRepresentation rep = toRepresentation(group, full);
         List<GroupRepresentation> subGroups = group.getSubGroupsStream()
                 .filter(g -> groupMatchesSearchOrIsPathElement(g, search, exact))
-                .map(subGroup -> toGroupHierarchy(subGroup, full, search, exact)).collect(Collectors.toList());
+                .map(subGroup -> (lazy != null && lazy == true) ? toRepresentation(subGroup, full) : toGroupHierarchy(subGroup, full, search, exact)).collect(Collectors.toList());
         rep.setSubGroups(subGroups);
         return rep;
     }

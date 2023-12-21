@@ -1073,14 +1073,14 @@ public class RealmAdminResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Tag(name = KeycloakOpenAPI.Admin.Tags.REALMS_ADMIN)
     @Operation()
-    public GroupRepresentation getGroupByPath(@PathParam("path") String path) {
+    public GroupRepresentation getGroupByPath(@PathParam("path") String path, @QueryParam("lazy") Boolean lazy) {
         GroupModel found = KeycloakModelUtils.findGroupByPath(realm, path);
         if (found == null) {
             throw new NotFoundException("Group path does not exist");
 
         }
         auth.groups().requireView(found);
-        return ModelToRepresentation.toGroupHierarchy(found, true);
+        return ModelToRepresentation.toGroupHierarchyLazy(found, true, lazy);
     }
 
     /**

@@ -797,7 +797,7 @@ public class OIDCProtocolMappersTest extends AbstractKeycloakTest {
         protocolMappers.createMapper(Arrays.asList(clientMapper));
 
         // Add user 'level2GroupUser' to the group 'level2Group2'
-        GroupRepresentation level2Group2 = adminClient.realm("test").getGroupByPath("/topGroup/level2group2");
+        GroupRepresentation level2Group2 = adminClient.realm("test").getGroupByPath("/topGroup/level2group2", null);
         UserResource level2GroupUser = ApiUtil.findUserByUsernameId(adminClient.realm("test"), "level2GroupUser");
         level2GroupUser.joinGroup(level2Group2.getId());
 
@@ -1016,7 +1016,7 @@ public class OIDCProtocolMappersTest extends AbstractKeycloakTest {
         group1.setAttributes(new HashMap<>());
         group1.getAttributes().put("group-value", Arrays.asList("value1", "value2"));
         adminClient.realm("test").groups().add(group1);
-        group1 = adminClient.realm("test").getGroupByPath("/group1");
+        group1 = adminClient.realm("test").getGroupByPath("/group1", null);
         userResource.joinGroup(group1.getId());
         // create the attribute mapper
         ProtocolMappersResource protocolMappers = findClientResourceByClientId(adminClient.realm("test"), "test-app").getProtocolMappers();
@@ -1056,7 +1056,7 @@ public class OIDCProtocolMappersTest extends AbstractKeycloakTest {
         group1.setAttributes(new HashMap<>());
         group1.getAttributes().put("group-value", Arrays.asList("value1", "value2"));
         adminClient.realm("test").groups().add(group1);
-        group1 = adminClient.realm("test").getGroupByPath("/group1");
+        group1 = adminClient.realm("test").getGroupByPath("/group1", null);
         userResource.joinGroup(group1.getId());
         // create the attribute mapper
         ProtocolMappersResource protocolMappers = findClientResourceByClientId(adminClient.realm("test"), "test-app").getProtocolMappers();
@@ -1097,7 +1097,7 @@ public class OIDCProtocolMappersTest extends AbstractKeycloakTest {
         group1.setAttributes(new HashMap<>());
         group1.getAttributes().put("group-value", Arrays.asList("value1", "value2"));
         adminClient.realm("test").groups().add(group1);
-        group1 = adminClient.realm("test").getGroupByPath("/group1");
+        group1 = adminClient.realm("test").getGroupByPath("/group1", null);
         userResource.joinGroup(group1.getId());
         // create the attribute mapper
         ProtocolMappersResource protocolMappers = findClientResourceByClientId(adminClient.realm("test"), "test-app").getProtocolMappers();
@@ -1136,7 +1136,7 @@ public class OIDCProtocolMappersTest extends AbstractKeycloakTest {
         group1.setAttributes(new HashMap<>());
         group1.getAttributes().put("group-value", Arrays.asList("value1", "value2"));
         adminClient.realm("test").groups().add(group1);
-        group1 = adminClient.realm("test").getGroupByPath("/group1");
+        group1 = adminClient.realm("test").getGroupByPath("/group1", null);
         userResource.joinGroup(group1.getId());
         // create the attribute mapper
         ProtocolMappersResource protocolMappers = findClientResourceByClientId(adminClient.realm("test"), "test-app").getProtocolMappers();
@@ -1170,7 +1170,7 @@ public class OIDCProtocolMappersTest extends AbstractKeycloakTest {
         group1.setAttributes(new HashMap<>());
         group1.getAttributes().put("group-value", Arrays.asList("value1", "value2"));
         adminClient.realm("test").groups().add(group1);
-        group1 = adminClient.realm("test").getGroupByPath("/group1");
+        group1 = adminClient.realm("test").getGroupByPath("/group1", null);
         userResource.joinGroup(group1.getId());
 
         // create the attribute mapper
@@ -1206,7 +1206,7 @@ public class OIDCProtocolMappersTest extends AbstractKeycloakTest {
         group1.setAttributes(new HashMap<>());
         group1.getAttributes().put("group-value", Arrays.asList("value1", "value2"));
         adminClient.realm("test").groups().add(group1);
-        group1 = adminClient.realm("test").getGroupByPath("/group1");
+        group1 = adminClient.realm("test").getGroupByPath("/group1", null);
         userResource.joinGroup(group1.getId());
 
         // create the attribute mapper
@@ -1242,14 +1242,14 @@ public class OIDCProtocolMappersTest extends AbstractKeycloakTest {
         group1.setAttributes(new HashMap<>());
         group1.getAttributes().put("group-value", Arrays.asList("value1", "value2"));
         adminClient.realm("test").groups().add(group1);
-        group1 = adminClient.realm("test").getGroupByPath("/group1");
+        group1 = adminClient.realm("test").getGroupByPath("/group1", null);
         userResource.joinGroup(group1.getId());
         GroupRepresentation group2 = new GroupRepresentation();
         group2.setName("group2");
         group2.setAttributes(new HashMap<>());
         group2.getAttributes().put("group-value", Arrays.asList("value2", "value3"));
         adminClient.realm("test").groups().add(group2);
-        group2 = adminClient.realm("test").getGroupByPath("/group2");
+        group2 = adminClient.realm("test").getGroupByPath("/group2", null);
         userResource.joinGroup(group2.getId());
 
         // create the attribute mapper
@@ -1287,14 +1287,14 @@ public class OIDCProtocolMappersTest extends AbstractKeycloakTest {
         group1.setAttributes(new HashMap<>());
         group1.getAttributes().put("group-value", Arrays.asList("value1", "value2"));
         adminClient.realm("test").groups().add(group1);
-        group1 = adminClient.realm("test").getGroupByPath("/group1");
+        group1 = adminClient.realm("test").getGroupByPath("/group1", null);
         userResource.joinGroup(group1.getId());
         GroupRepresentation group2 = new GroupRepresentation();
         group2.setName("group2");
         group2.setAttributes(new HashMap<>());
         group2.getAttributes().put("group-value", Arrays.asList("value2", "value3"));
         adminClient.realm("test").groups().add(group2);
-        group2 = adminClient.realm("test").getGroupByPath("/group2");
+        group2 = adminClient.realm("test").getGroupByPath("/group2", null);
         userResource.joinGroup(group2.getId());
 
         // create the attribute mapper
@@ -1334,14 +1334,14 @@ public class OIDCProtocolMappersTest extends AbstractKeycloakTest {
         group1.setAttributes(new HashMap<>());
         group1.getAttributes().put("group-value", Arrays.asList("value1", "value2"));
         adminClient.realm("test").groups().add(group1);
-        group1 = adminClient.realm("test").getGroupByPath("/group1");
+        group1 = adminClient.realm("test").getGroupByPath("/group1", null);
         userResource.joinGroup(group1.getId());
         GroupRepresentation group2 = new GroupRepresentation();
         group2.setName("group2");
         group2.setAttributes(new HashMap<>());
         group2.getAttributes().put("group-value", Arrays.asList("value2", "value3"));
         adminClient.realm("test").groups().add(group2);
-        group2 = adminClient.realm("test").getGroupByPath("/group2");
+        group2 = adminClient.realm("test").getGroupByPath("/group2", null);
         userResource.joinGroup(group2.getId());
 
         // create the attribute mapper
@@ -1385,12 +1385,12 @@ public class OIDCProtocolMappersTest extends AbstractKeycloakTest {
         group1.setAttributes(new HashMap<>());
         group1.getAttributes().put("group-value", Arrays.asList("value1", "value2"));
         adminClient.realm("test").groups().add(group1);
-        group1 = adminClient.realm("test").getGroupByPath("/group1");
+        group1 = adminClient.realm("test").getGroupByPath("/group1", null);
         GroupRepresentation group2 = new GroupRepresentation();
         group2.setName("group2");
         group2.setAttributes(new HashMap<>());
         adminClient.realm("test").groups().add(group2);
-        group2 = adminClient.realm("test").getGroupByPath("/group2");
+        group2 = adminClient.realm("test").getGroupByPath("/group2", null);
         // make group2 a subgroup of group1 and make user join group2
         adminClient.realm("test").groups().group(group1.getId()).subGroup(group2);
         userResource.joinGroup(group2.getId());
@@ -1433,13 +1433,13 @@ public class OIDCProtocolMappersTest extends AbstractKeycloakTest {
         group1.setAttributes(new HashMap<>());
         group1.getAttributes().put("group-value", Arrays.asList("value1", "value2"));
         adminClient.realm("test").groups().add(group1);
-        group1 = adminClient.realm("test").getGroupByPath("/group1");
+        group1 = adminClient.realm("test").getGroupByPath("/group1", null);
         GroupRepresentation group2 = new GroupRepresentation();
         group2.setName("group2");
         group2.setAttributes(new HashMap<>());
         group2.getAttributes().put("group-value", Arrays.asList("value3", "value4"));
         adminClient.realm("test").groups().add(group2);
-        group2 = adminClient.realm("test").getGroupByPath("/group2");
+        group2 = adminClient.realm("test").getGroupByPath("/group2", null);
         // make group2 a subgroup of group1 and make user join group2
         adminClient.realm("test").groups().group(group1.getId()).subGroup(group2);
         userResource.joinGroup(group2.getId());
@@ -1482,13 +1482,13 @@ public class OIDCProtocolMappersTest extends AbstractKeycloakTest {
         group1.setAttributes(new HashMap<>());
         group1.getAttributes().put("group-value", Arrays.asList("value1", "value2"));
         adminClient.realm("test").groups().add(group1);
-        group1 = adminClient.realm("test").getGroupByPath("/group1");
+        group1 = adminClient.realm("test").getGroupByPath("/group1", null);
         GroupRepresentation group2 = new GroupRepresentation();
         group2.setName("group2");
         group2.setAttributes(new HashMap<>());
         group2.getAttributes().put("group-value", Arrays.asList("value2", "value3"));
         adminClient.realm("test").groups().add(group2);
-        group2 = adminClient.realm("test").getGroupByPath("/group2");
+        group2 = adminClient.realm("test").getGroupByPath("/group2", null);
         // make group2 a subgroup of group1 and make user join group2
         adminClient.realm("test").groups().group(group1.getId()).subGroup(group2);
         userResource.joinGroup(group2.getId());
@@ -1536,13 +1536,13 @@ public class OIDCProtocolMappersTest extends AbstractKeycloakTest {
         group1.setAttributes(new HashMap<>());
         group1.getAttributes().put("group-value", Arrays.asList("value1", "value2"));
         adminClient.realm("test").groups().add(group1);
-        group1 = adminClient.realm("test").getGroupByPath("/group1");
+        group1 = adminClient.realm("test").getGroupByPath("/group1", null);
         GroupRepresentation group2 = new GroupRepresentation();
         group2.setName("group2");
         group2.setAttributes(new HashMap<>());
         group2.getAttributes().put("group-value", Arrays.asList("value2", "value3"));
         adminClient.realm("test").groups().add(group2);
-        group2 = adminClient.realm("test").getGroupByPath("/group2");
+        group2 = adminClient.realm("test").getGroupByPath("/group2", null);
         // make group2 a subgroup of group1 and make user join group2
         adminClient.realm("test").groups().group(group1.getId()).subGroup(group2);
         userResource.joinGroup(group2.getId());

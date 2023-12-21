@@ -267,7 +267,7 @@ public class GroupTest extends AbstractGroupTest {
             getCleanup().addGroupId(ApiUtil.getCreatedId(response));
         }
 
-        assertNotNull(realm.getGroupByPath("/test-group/test-group"));
+        assertNotNull(realm.getGroupByPath("/test-group/test-group", null));
     }
 
     @Test
@@ -403,7 +403,7 @@ public class GroupTest extends AbstractGroupTest {
             }
         });
 
-        level2Group = realm.getGroupByPath("/top/level2");
+        level2Group = realm.getGroupByPath("/top/level2", null);
         assertNotNull(level2Group);
         roles.clear();
         roles.add(level2Role);
@@ -416,14 +416,14 @@ public class GroupTest extends AbstractGroupTest {
         response.close();
         assertAdminEvents.assertEvent(testRealmId, OperationType.CREATE, AdminEventPaths.groupSubgroupsPath(level2Group.getId()), level3Group, ResourceType.GROUP);
 
-        level3Group = realm.getGroupByPath("/top/level2/level3");
+        level3Group = realm.getGroupByPath("/top/level2/level3", null);
         assertNotNull(level3Group);
         roles.clear();
         roles.add(level3Role);
         realm.groups().group(level3Group.getId()).roles().realmLevel().add(roles);
         assertAdminEvents.assertEvent(testRealmId, OperationType.CREATE, AdminEventPaths.groupRolesRealmRolesPath(level3Group.getId()), roles, ResourceType.REALM_ROLE_MAPPING);
 
-        topGroup = realm.getGroupByPath("/top");
+        topGroup = realm.getGroupByPath("/top", null);
         assertEquals(1, topGroup.getRealmRoles().size());
         assertTrue(topGroup.getRealmRoles().contains("topRole"));
         assertEquals(1, topGroup.getSubGroups().size());
@@ -481,19 +481,19 @@ public class GroupTest extends AbstractGroupTest {
         assertAdminEvents.assertEvent(testRealmId, OperationType.DELETE, AdminEventPaths.groupPath(topGroup.getId()), ResourceType.GROUP);
 
         try {
-            realm.getGroupByPath("/top/level2/level3");
+            realm.getGroupByPath("/top/level2/level3", null);
             Assert.fail("Group should not have been found");
         }
         catch (NotFoundException e) {}
 
         try {
-            realm.getGroupByPath("/top/level2");
+            realm.getGroupByPath("/top/level2", null);
             Assert.fail("Group should not have been found");
         }
         catch (NotFoundException e) {}
 
         try {
-            realm.getGroupByPath("/top");
+            realm.getGroupByPath("/top", null);
             Assert.fail("Group should not have been found");
         }
         catch (NotFoundException e) {}
@@ -512,7 +512,7 @@ public class GroupTest extends AbstractGroupTest {
           .singleAttribute("attr2", "attrval2")
           .build();
         createGroup(realm, group);
-        group = realm.getGroupByPath("/" + groupName);
+        group = realm.getGroupByPath("/" + groupName, null);
 
         assertNotNull(group);
         assertThat(group.getName(), is(groupName));
@@ -530,7 +530,7 @@ public class GroupTest extends AbstractGroupTest {
         realm.groups().group(group.getId()).update(group);
         assertAdminEvents.assertEvent(testRealmId, OperationType.UPDATE, AdminEventPaths.groupPath(group.getId()), group, ResourceType.GROUP);
 
-        group = realm.getGroupByPath("/" + groupNewName);
+        group = realm.getGroupByPath("/" + groupNewName, null);
 
         assertThat(group.getName(), is(groupNewName));
         assertThat(group.getAttributes().keySet(), containsInAnyOrder("attr2", "attr3"));
